@@ -1,13 +1,21 @@
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ReactNode } from "react";
 
 interface Props {
   children: ReactNode;
+  onClose: () => void;
 }
 
-const Alert = ({ children }: Props) => {
+const Alert = ({ children, onClose }: Props) => {
   return (
-    <div className="bg-orange-500 font-bold text-white w-1/2 mx-auto mt-10 p-4 rounded">
+    <div className="w-1/2 mx-auto bg-green-500 mt-3 p-4 rounded text-white font-extrabold">
       {children}
+      <FontAwesomeIcon
+        className="text-right"
+        icon={faXmark}
+        onClick={onClose}
+      />
     </div>
   );
 };

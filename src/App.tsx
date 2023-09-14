@@ -1,4 +1,6 @@
+import { useState } from "react";
 import Alert from "./components/Alert";
+import Button from "./components/Button";
 import ListGroup from "./components/ListGroup";
 import SlotGroup from "./components/SlotGroup";
 
@@ -21,12 +23,15 @@ function App() {
   const handleSelectSlot = (slot: string) => {
     console.log(`You have selected slot: ${slot}`);
   };
-
+  const [alertVisible, setAlertVisibility] = useState(false);
   return (
     <>
-      <Alert>
-        Hello, this is <span className="bg-black rounded p-2">World.</span>
-      </Alert>
+      {alertVisible && (
+        <Alert onClose={() => setAlertVisibility(false)}>
+          This is an alert
+        </Alert>
+      )}
+      <Button onClick={() => setAlertVisibility(true)}>My Button</Button>
       <ListGroup
         items={items}
         heading="Countries"
