@@ -3,8 +3,9 @@ import { useState } from "react";
 interface Props {
   slots: string[];
   heading: string;
+  onSelectSlot: (slot: string) => void;
 }
-function SlotGroup({ slots, heading }: Props) {
+function SlotGroup({ slots, heading, onSelectSlot }: Props) {
   const [selectedSlot, setSelectedSlot] = useState(-1);
   return (
     <>
@@ -21,7 +22,10 @@ function SlotGroup({ slots, heading }: Props) {
                   ? "mb-2 cursor-pointer bg-orange-500 text-white rounded py-2 px-2"
                   : "mb-2 cursor-pointer hover:bg-blue-500 hover:text-white hover:rounded py-2 px-2"
               }
-              onClick={() => setSelectedSlot(index)}
+              onClick={() => {
+                setSelectedSlot(index);
+                onSelectSlot(slot);
+              }}
             >
               {slot}
             </li>
