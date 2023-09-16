@@ -1,15 +1,15 @@
 interface Props {
-  children: string;
+  text: string;
   onClick: () => void;
 }
-const Button = ({ children, onClick }: Props) => {
+const Button = ({ text, onClick }: Props) => {
   return (
-    <div className="w-1/2 mx-auto mt-4">
+    <div className="w-1/2 mx-auto">
       <button
-        className="px-4 py-2 rounded text-white bg-orange-500"
+        className="px-4 py-2 rounded text-white bg-orange-500 font-bold"
         onClick={onClick}
       >
-        {children}
+        {text}
       </button>
     </div>
   );
