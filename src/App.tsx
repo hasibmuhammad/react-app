@@ -1,15 +1,16 @@
 import { useState } from "react";
 
 const App = () => {
-  const [person, setPerson] = useState({
-    id: 1,
-    contact: {
-      name: "John",
-    },
+  const [pizza, setPizza] = useState({
+    name: "Spicy Pepperoni",
+    toppings: ["Mushroom"],
   });
+
   const handleclick = () => {
-    setPerson({ ...person, contact: { ...person.contact, name: "Shuvo" } });
+    setPizza({ ...pizza, toppings: [...pizza.toppings, "Cheese"] });
   };
+
+  console.log(pizza);
 
   return (
     <>
@@ -17,10 +18,8 @@ const App = () => {
         className="bg-orange-500 text-white py-2 px-4 rounded "
         onClick={() => handleclick()}
       >
-        Click
+        Click Me
       </button>
-
-      {person && <p>{person.contact.name}</p>}
     </>
   );
 };
