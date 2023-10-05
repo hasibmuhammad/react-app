@@ -1,26 +1,21 @@
 import { FormEvent, useState } from "react";
+import { useForm, FieldValues } from "react-hook-form";
 
 const Form = () => {
-  const [person, setPerson] = useState({ name: "", email: "" });
+  const { register, handleSubmit } = useForm();
 
-  const handleSubmit = (event: FormEvent) => {
-    event.preventDefault();
+  const onSubmit = (data: FieldValues) => console.log(data);
 
-    console.log(person);
-  };
   return (
     <form
-      onSubmit={handleSubmit}
+      onSubmit={handleSubmit(onSubmit)}
       action=""
       className="max-w-md mx-auto min-h-screen flex flex-col justify-center items-center px-10"
     >
       <div className="w-full mb-3">
         <label htmlFor="name">Name: </label>
         <input
-          onChange={(event) => {
-            setPerson({ ...person, name: event.target.value });
-          }}
-          value={person.name}
+          {...register("name")}
           id="name"
           type="text"
           placeholder="Enter your name"
@@ -30,10 +25,7 @@ const Form = () => {
       <div className="w-full mb-3">
         <label htmlFor="email">Email: </label>
         <input
-          onChange={(event) =>
-            setPerson({ ...person, email: event.target.value })
-          }
-          value={person.email}
+          {...register("email")}
           id="email"
           type="email"
           placeholder="Enter your email"
