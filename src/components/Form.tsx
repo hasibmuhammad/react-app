@@ -1,19 +1,10 @@
-import { FormEvent, useRef } from "react";
+import { FormEvent, useState } from "react";
 
 const Form = () => {
-  const nameRef = useRef<HTMLInputElement>(null);
-  const emailRef = useRef<HTMLInputElement>(null);
-
-  const person = { name: "", email: "" };
+  const [person, setPerson] = useState({ name: "", email: "" });
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    if (nameRef.current !== null) {
-      person.name = nameRef.current.value;
-    }
-    if (emailRef.current !== null) {
-      person.email = emailRef.current.value;
-    }
 
     console.log(person);
   };
@@ -26,7 +17,10 @@ const Form = () => {
       <div className="w-full mb-3">
         <label htmlFor="name">Name: </label>
         <input
-          ref={nameRef}
+          onChange={(event) => {
+            setPerson({ ...person, name: event.target.value });
+          }}
+          value={person.name}
           id="name"
           type="text"
           placeholder="Enter your name"
@@ -36,7 +30,10 @@ const Form = () => {
       <div className="w-full mb-3">
         <label htmlFor="email">Email: </label>
         <input
-          ref={emailRef}
+          onChange={(event) =>
+            setPerson({ ...person, email: event.target.value })
+          }
+          value={person.email}
           id="email"
           type="email"
           placeholder="Enter your email"
