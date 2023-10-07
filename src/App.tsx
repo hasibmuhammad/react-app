@@ -1,24 +1,38 @@
-import ProductList from "./components/ProductList";
 import { useState } from "react";
-import Users from "./components/Users";
+import ExpenseList from "./epense-tracker/ExpenseList";
+import ExpenseCategories from "./epense-tracker/ExpenseFilter";
+import ExpenseForm from "./epense-tracker/ExpenseForm";
 
 const App = () => {
-  const [category, setCategoy] = useState("");
+  const [selectedCategory, setselectedCategory] = useState("");
+
+  const [expenses, setExpenses] = useState([
+    { id: 1, description: "Milk", price: 20, category: "Utilities" },
+    { id: 2, description: "Apple", price: 30, category: "Groceries" },
+    { id: 3, description: "Laptop", price: 20, category: "Utilities" },
+    { id: 4, description: "Mobile", price: 100, category: "Electronics" },
+    { id: 5, description: "Mobile", price: 100, category: "Electronics" },
+  ]);
+
+  const visibleCategory = selectedCategory
+    ? expenses.filter((e) => e.category === selectedCategory)
+    : expenses;
 
   return (
-    <div className="min-h-screen max-w-md mx-auto flex justify-center flex-col items-center">
-      {/* <ProductList category={category} />
-      <select
-        name=""
-        id=""
-        className="w-1/2 border border-orange-400 p-3"
-        onChange={(event) => setCategoy(event.target.value)}
-      >
-        <option value="Clothing">Clothing</option>
-        <option value="Housing">Housing</option>
-      </select> */}
-      <Users />
-    </div>
+    <>
+      <ExpenseForm
+        onSubmit={(expense) =>
+          setExpenses([...expenses, { id: expenses.length + 1, ...expense }])
+        }
+      />
+      <ExpenseCategories
+        onSelectCategory={(category) => setselectedCategory(category)}
+      />
+      <ExpenseList
+        expenses={visibleCategory}
+        onDelete={(id) => setExpenses(expenses.filter((e) => id !== e.id))}
+      />
+    </>
   );
 };
 
